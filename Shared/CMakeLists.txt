@@ -64,3 +64,8 @@ endif()
 if(MSVC)
     target_compile_options(Shared PRIVATE /MP)
 endif(MSVC)
+
+# Define data prefix
+if(USE_SYSTEM_PATH)
+    target_compile_definitions(Shared PRIVATE DATA_PREFIX="${CMAKE_INSTALL_PREFIX}/share/unnamed-sdvx-clone")
+endif()

@@ -5,14 +5,25 @@
 /*
 	Common
 */
+#ifdef DATA_PREFIX
+String Path::gameDir = Path::GetUserDataDirectory() + sep + "usc";
+#else
 String Path::gameDir = "";
+#endif
 
 String Path::Absolute(const String& path)
 {
 	if(IsAbsolute(path))
 		return path;
 
+#ifdef DATA_PREFIX
+	String baseDir = String(DATA_PREFIX);
+	if (path.find("skins/Default") == String::npos && path.find("fonts") == String::npos) {
+		baseDir = !gameDir.empty() ? gameDir : RemoveLast(GetExecutablePath());
+	}
+#else
 	String baseDir = !gameDir.empty() ? gameDir : RemoveLast(GetExecutablePath());
+#endif
 	return baseDir + sep + path;
 }
 String Path::RemoveLast(const String& path, String* lastOut /*= nullptr*/)

@@ -94,6 +94,7 @@ if(WIN32)
 endif()
 
 OPTION(EMBEDDED "Enable embedded build" OFF)
+OPTION(USE_SYSTEM_PATH "Use system path to search for resources" ON)
 
 if(EMBEDDED)
 	message("Enabling embedded build")

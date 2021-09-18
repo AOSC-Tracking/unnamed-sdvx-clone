@@ -17,14 +17,37 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <pwd.h>
+#include <filesystem>
 // Convenience
 #define MAX_PATH PATH_MAX
 
 char Path::sep = '/';
 
+String Path::GetUserDataDirectory()
+{
+	size_t bufsize;
+	char *buf;
+	struct passwd *result;
+	struct passwd pwd;
+	int ret;
+	const char *datadir = getenv("XDG_DATA_HOME");
+	if (datadir) return String(datadir);
+	const char *homedir = getenv("HOME");
+	if (homedir) return String(homedir) + "/.local/share";
+	bufsize = sysconf(_SC_GETPW_R_SIZE_MAX);
+	if (bufsize == -1)
+		bufsize = 16384;
+	buf = (char*)malloc(bufsize);
+	if (!buf) return "";
+	ret = getpwuid_r(geteuid(), &pwd, buf, bufsize, &result);
+	if (!result) return "";
+
+	return String(result->pw_dir) + "/.local/share";
+}
 bool Path::CreateDir(const String& path)
 {
-	return mkdir(*path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == 0;
+	return std::filesystem::create_directories(path.c_str());
 }
 bool Path::Delete(const String& path)
 {
