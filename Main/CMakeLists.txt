@@ -62,7 +62,9 @@ target_compile_definitions(usc-game PRIVATE VERSION_MAJOR=${PROJECT_VERSION_MAJO
 target_compile_definitions(usc-game PRIVATE VERSION_PATCH=${PROJECT_VERSION_PATCH})
 find_package (Git)
 if(GIT_FOUND)
-    target_compile_definitions(usc-game PRIVATE GIT_COMMIT=${GIT_DATE_HASH})
+    if(GIT_DATE_HASH)
+      target_compile_definitions(usc-game PRIVATE GIT_COMMIT=${GIT_DATE_HASH})
+    endif()
     execute_process(
       COMMAND git rev-parse --abbrev-ref HEAD
       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
