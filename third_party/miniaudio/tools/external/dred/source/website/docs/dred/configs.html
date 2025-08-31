@@ -1,0 +1,38 @@
+{{ include "dred-header.html" }}
+    <div style="background-color:#fff; text-align:center; padding-top:1em;">
+        <ul class="footer-links">
+            <li><a href="{{ relative-path "docs/dred/commands.html" }}">Command List</a></li>
+            <li>|</li>
+            <li><a href="{{ relative-path "docs/dred/configs.html" }}">Config Variable List</a></li>
+            <li>|</li>
+            <li><a href="{{ relative-path "docs/dred/releases/index.html" }}">Releases Notes</a></li>
+        </ul>
+        <div style="background-color:#fff; margin:0 auto; width:66%; padding:2em; text-align:left;">
+            <h2>Special config commands</h2>
+            <div id="include" class="cfg-title">
+                include [file path]
+                <div style="padding-left:1em; padding-bottom:1em; margin-bottom:1em; border-bottom:solid 1px #ccc;">
+                    <div style="margin-bottom:0.5em;">Includes an external config file.</div>
+                </div>
+            </div>
+            <div id="exec" class="cfg-title">
+                exec [command]
+                <div style="padding-left:1em; padding-bottom:1em; margin-bottom:1em; border-bottom:solid 1px #ccc;">
+                    <div style="margin-bottom:0.5em;">Executes a command.</div>
+                </div>
+            </div>
+            <div id="bind" class="cfg-title">
+                bind [name] [shortcut] [command]
+                <div style="padding-left:1em; padding-bottom:1em; margin-bottom:1em; border-bottom:solid 1px #ccc;">
+                    <div style="margin-bottom:0.5em;">Binds a command to an accelerator (keyboard shortcut).</div>
+                    <div>Example: <code>bind "Compile" "CTRL+F9" "!gcc %"</code></div>
+                </div>
+            </div>
+
+            <h2>Full config variable list list</h2>
+			<div>
+				{{ dred-config-var-list }}
+			</div>
+        </div>
+    </div>
+{{ include "dred-footer.html" }}
