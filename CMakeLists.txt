@@ -118,6 +118,9 @@ endif()
 # Include macros
 include(${PROJECT_SOURCE_DIR}/cmake/Macros.cmake)
 
+# AOSC: prepare for lua and sqlite
+find_package(PkgConfig REQUIRED)
+
 # Sub-Project directories
 add_subdirectory(third_party)
 add_subdirectory(Shared)

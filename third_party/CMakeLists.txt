@@ -1,5 +1,4 @@
 # All third party libraries
-add_subdirectory(lua-5.3.5)
 
 #cpr test programs
 option(CPR_BUILD_TESTS "Set to ON to build cpr tests." OFF)
@@ -35,14 +34,6 @@ target_include_directories(miniaudio INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/minia
 #json for modern c++
 add_library(nlohmann_json INTERFACE)
 target_include_directories(nlohmann_json INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/nlohmann_json)
-
-#sqlite
-add_library(sqlite3
-    sqlite3/sqlite3.c
-    sqlite3/sqlite3.h
-    sqlite3/sqlite3ext.h
-)
-target_include_directories(sqlite3 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/sqlite3)
 
 #minimp3
 add_library(minimp3

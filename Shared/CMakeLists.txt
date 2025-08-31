@@ -44,7 +44,14 @@ target_include_directories(Shared PRIVATE
     ${PCHROOT}
 )
 
-target_link_libraries(Shared lua)
+# AOSC Shared libs
+pkg_check_modules(SQLITE3 REQUIRED sqlite3)
+target_link_libraries(Shared ${SQLITE3_LIBRARIES})
+target_include_directories(Shared SYSTEM PRIVATE ${SQLITE3_INCLUDE_DIRS})
+
+pkg_check_modules(LUA REQUIRED lua5.3)
+target_link_libraries(Shared ${LUA_LIBRARIES})
+target_include_directories(Shared SYSTEM PRIVATE ${LUA_INCLUDE_DIRS})
 
 target_link_libraries(Shared ${Iconv_LIBRARIES})
 target_include_directories(Shared SYSTEM PRIVATE ${Iconv_INCLUDE_DIRS})

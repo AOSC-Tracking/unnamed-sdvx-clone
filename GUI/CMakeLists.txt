@@ -34,7 +34,6 @@ target_include_directories(GUI PRIVATE
 target_link_libraries(GUI Shared)
 target_link_libraries(GUI nanovg)
 target_link_libraries(GUI Graphics)
-target_link_libraries(GUI lua)
 
 target_link_libraries(GUI cc-common)
 
