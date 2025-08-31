@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <utility>
+#include <cstdint>
 
 namespace cpr {
 
