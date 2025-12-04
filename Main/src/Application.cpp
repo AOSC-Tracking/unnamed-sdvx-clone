@@ -2591,6 +2591,12 @@ static int lGetSkin(lua_State *L)
 	return 1;
 }
 
+static int lGetNauticaCache(lua_State *L)
+{
+	lua_pushstring(L, *Path::Normalize(Path::Absolute("nautica.json")));
+	return 1;
+}
+
 static int lSetSkinSetting(lua_State *L /*String key, Any value*/)
 {
 	String key = luaL_checkstring(L, 1);
@@ -2909,6 +2915,7 @@ void Application::SetLuaBindings(lua_State *state)
 		pushFuncToTable("GetLaserColor", lGetLaserColor);
 		pushFuncToTable("GetButton", lGetButton);
 		pushFuncToTable("GetKnob", lGetKnob);
+		pushFuncToTable("GetNauticaCache", lGetNauticaCache);
 		pushFuncToTable("UpdateAvailable", lGetUpdateAvailable);
 		pushFuncToTable("GetSkin", lGetSkin);
 		pushFuncToTable("GetSkin", lGetSkin);

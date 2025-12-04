@@ -32,7 +32,7 @@ local searchText = gfx.CreateLabel("",5,0)
 local searchIndex = 1
 local searchInputActive = false
 
-local cachepath = path.Absolute("skins/" .. game.GetSkin() .. "/nautica.json")
+local cachepath = game.GetNauticaCache()
 local levelcursor = 0
 local sortingcursor = 0
 local sortingOptions = {"Uploaded", "Oldest"}
@@ -401,7 +401,7 @@ function button_pressed(button)
         dlcache = io.open(cachepath, "w")
         dlcache:write(json.encode(downloaded))
         dlcache:close()
-        dlScreen.Exit() 
+        dlScreen.Exit()
     end
 end
 

@@ -1074,6 +1074,13 @@ protected:
 		}
 
 		m_allSkins = Path::GetSubDirs(Path::Normalize(Path::Absolute("skins/")));
+		// AOSCOS: we guarantee that Default exists in /usr/share.
+		// However, since it's separated from the user config directory, let's hack
+		// the entry here.
+		if (!m_allSkins.Contains("Default"))
+		{
+			m_allSkins.Add("Default");
+		}
 		m_skinConfigTextData.clear();
 		m_useHSVMap.clear();
 	}

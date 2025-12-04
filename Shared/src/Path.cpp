@@ -18,8 +18,12 @@ String Path::Absolute(const String& path)
 
 #ifdef DATA_PREFIX
 	String baseDir = String(DATA_PREFIX);
-	if (path.find("skins/Default") == String::npos && path.find("fonts") == String::npos) {
-		baseDir = !gameDir.empty() ? gameDir : RemoveLast(GetExecutablePath());
+	String testBaseDir = !gameDir.empty() ? gameDir : RemoveLast(GetExecutablePath());
+	if ((path.find("skins/Default") == String::npos &&
+		 path.find("fonts") == String::npos ) ||
+		FileExists(testBaseDir + sep + path))
+	{
+		return testBaseDir + sep + path;
 	}
 #else
 	String baseDir = !gameDir.empty() ? gameDir : RemoveLast(GetExecutablePath());

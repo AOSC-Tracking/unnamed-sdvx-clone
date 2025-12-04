@@ -38,11 +38,11 @@ SkinConfig::SkinConfig(const String& skin)
 		{
 			g_gameWindow->ShowMessageBox("Skin config parser error.", message, 0);
 		};
-		
+
 
 		Buffer buf;
 		buf.resize(defFile.GetSize());
-		
+
 		defFile.Read(buf.data(), buf.size());
 		String jsonData((char*)buf.data(), buf.size());
 		ordered_json definitions;
@@ -76,7 +76,7 @@ SkinConfig::SkinConfig(const String& skin)
 				showError(Utility::Sprintf("No type specified for: \"%s\"", key));
 				continue;
 			}
-			
+
 			values.at("type").get_to(type);
 
 			if (!inputModeMap.Contains(type))
@@ -165,7 +165,14 @@ SkinConfig::SkinConfig(const String& skin)
 	}
 
     InitDefaults();
-	Load(Path::Normalize(Path::Absolute("skins/" + skin + "/skin.cfg")));
+	if (skin == "Default")
+	{
+		Load(Path::Normalize(Path::Absolute("defaultskin.cfg")));
+	}
+	else
+	{
+		Load(Path::Normalize(Path::Absolute("skins/" + skin + "/skin.cfg")));
+	}
 }
 
 SkinConfig::~SkinConfig()
@@ -174,7 +181,10 @@ SkinConfig::~SkinConfig()
 	{
 		m_reverseKeys.Add(it.second, it.first);
 	}
-	Save(Path::Normalize(Path::Absolute("skins/" + m_skin + "/skin.cfg")));
+	if (m_skin == "Default")
+		Save(Path::Normalize(Path::Absolute("defaultskin.cfg")));
+	else
+		Save(Path::Normalize(Path::Absolute("skins/" + m_skin + "/skin.cfg")));
 	for (auto s : m_settings)
 	{
 		if (s.type == SkinSetting::Type::Color)
